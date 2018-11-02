@@ -1,0 +1,12 @@
+node_modules
+*.log
+
+# OS or editor misc files
+*~
+*.bak
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# IDE config files
+.idea
