@@ -15,7 +15,7 @@
     "TypeScript"
   ],
   "author": "Kanji Furuhashi",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "private": true,
   "dependencies": {
     "typescript": "^3.1.6",
