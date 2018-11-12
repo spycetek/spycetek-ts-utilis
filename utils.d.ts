@@ -2,10 +2,14 @@
  *
  */
 export declare class Utils {
-    static readonly DEFAULT_SELECTOR_PARAMS = ".cocci-params";
+    static readonly DEFAULT_SELECTOR_PARAMS = ".spycetek-params";
     private static pageParams;
     private static initialized;
     static init(): void;
+    /**
+     * Parse page parameter like <div class="spycetek-params" data-my-param-1=".." data-my-param-2=".." ...>.
+     * This also moves this <div> to the end of <body>.
+     */
     private static parsePageParameter;
     /**
      *

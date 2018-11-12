@@ -1,9 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var typescript_map_1 = require("typescript-map");
-// $(function() {
-//     Utils.init();
-// });
 /**
  *
  */
@@ -17,9 +14,14 @@ var Utils = /** @class */ (function () {
         Utils.parsePageParameter();
         Utils.initialized = true;
     };
+    /**
+     * Parse page parameter like <div class="spycetek-params" data-my-param-1=".." data-my-param-2=".." ...>.
+     * This also moves this <div> to the end of <body>.
+     */
     Utils.parsePageParameter = function () {
         var params = new typescript_map_1.TSMap();
         var $paramTags = $(Utils.DEFAULT_SELECTOR_PARAMS);
+        $paramTags.appendTo('body');
         $paramTags.each(function (i, element) {
             $.each($(element).data(), function (key, value) {
                 params.set(String(key), value);
@@ -136,7 +138,7 @@ var Utils = /** @class */ (function () {
         }
         return true;
     };
-    Utils.DEFAULT_SELECTOR_PARAMS = ".cocci-params";
+    Utils.DEFAULT_SELECTOR_PARAMS = ".spycetek-params";
     Utils.initialized = false;
     return Utils;
 }());

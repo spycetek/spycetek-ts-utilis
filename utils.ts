@@ -1,15 +1,11 @@
 import {TSMap} from "typescript-map";
 
-// $(function() {
-//     Utils.init();
-// });
-
 /**
  *
  */
 export class Utils {
 
-    static readonly DEFAULT_SELECTOR_PARAMS = ".cocci-params";
+    static readonly DEFAULT_SELECTOR_PARAMS = ".spycetek-params";
 
     private static pageParams: TSMap<string, any>;
 
@@ -24,9 +20,14 @@ export class Utils {
         Utils.initialized = true;
     }
 
+    /**
+     * Parse page parameter like <div class="spycetek-params" data-my-param-1=".." data-my-param-2=".." ...>.
+     * This also moves this <div> to the end of <body>.
+     */
     private static parsePageParameter() {
         let params = new TSMap<string, any>();
         let $paramTags: JQuery = $(Utils.DEFAULT_SELECTOR_PARAMS);
+        $paramTags.appendTo('body');
         $paramTags.each(function (i, element) {
             $.each($(element).data(), function (key, value) {
                 params.set(String(key), value);
