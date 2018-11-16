@@ -42,6 +42,7 @@ export class Utils {
      * @return {any} number, string, or associative array (object)
      */
     public static getPageParameter(dataName: string): any {
+        Utils.init();
         return Utils.pageParams.get(dataName);
     }
 

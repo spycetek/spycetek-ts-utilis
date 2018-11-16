@@ -35,6 +35,7 @@ var Utils = /** @class */ (function () {
      * @return {any} number, string, or associative array (object)
      */
     Utils.getPageParameter = function (dataName) {
+        Utils.init();
         return Utils.pageParams.get(dataName);
     };
     /**
