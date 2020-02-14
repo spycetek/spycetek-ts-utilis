@@ -51,3 +51,6 @@ export declare class Utils {
      */
     static removeLocalStorage(key: string): boolean;
 }
+export interface AssociativeArray<T> {
+    [key: string]: T;
+}
