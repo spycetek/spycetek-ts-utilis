@@ -17,12 +17,9 @@
   "author": "Kanji Furuhashi",
   "license": "MIT",
   "private": true,
-  "dependencies": {
-    "typescript": "^3.1.6",
-    "@types/jquery": "^3.3.1",
-    "typescript-map": "0.0.5"
-  },
   "devDependencies": {
-    "jquery": "^3.3.1"
+    "typescript": "^3.1.6",
+    "typescript-map": "0.0.5",
+    "@types/jquery": "^3.3.32"
   }
 }
