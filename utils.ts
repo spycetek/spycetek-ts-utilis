@@ -151,3 +151,7 @@ export class Utils {
         return true;
     }
 }
+
+export interface AssociativeArray<T> {
+    [key: string]: T;
+}
