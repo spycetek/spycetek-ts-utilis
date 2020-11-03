@@ -7,43 +7,45 @@ export class Utils {
 
     static readonly DEFAULT_SELECTOR_PARAMS = ".spycetek-params";
 
-    private static pageParams: TSMap<string, any>;
-
-    private static initialized: boolean = false;
-
-    public static init() {
-        if (Utils.initialized) {
-            return;
-        }
-
-        Utils.parsePageParameter();
-        Utils.initialized = true;
-    }
+    private static pageParams: AssociativeArray<TSMap<string, any>>;
 
     /**
      * Parse page parameter like <div class="spycetek-params" data-my-param-1=".." data-my-param-2=".." ...>.
      * This also moves this <div> to the end of <body>.
      */
-    private static parsePageParameter() {
+    private static parsePageParameters(namespace: string) {
         let params = new TSMap<string, any>();
-        let $paramTags: JQuery = $(Utils.DEFAULT_SELECTOR_PARAMS);
+        let $paramTags: JQuery = $('.' + namespace);
         $paramTags.appendTo('body');
         $paramTags.each(function (i, element) {
             $.each($(element).data(), function (key, value) {
                 params.set(String(key), value);
             });
         });
-        Utils.pageParams = params;
+        Utils.pageParams[namespace] = params;
     }
 
     /**
      *
      * @param {string} dataName. e.g. "myValue" for attribute with name "data-my-value".
+     * @param namespace
      * @return {any} number, string, or associative array (object)
      */
-    public static getPageParameter(dataName: string): any {
-        Utils.init();
-        return Utils.pageParams.get(dataName);
+    public static getPageParameter(dataName: string, namespace: string = Utils.DEFAULT_SELECTOR_PARAMS): any {
+        return Utils.getPageParameters(namespace).get(dataName);
+    }
+
+    /**
+     *
+     * @param namespace
+     * @return {TSMap<string, any>}
+     */
+    public static getPageParameters(namespace: string = Utils.DEFAULT_SELECTOR_PARAMS): TSMap<string, any> {
+        if (Utils.pageParams[namespace] == null) {
+            Utils.parsePageParameters(namespace);
+        }
+
+        return Utils.pageParams[namespace];
     }
 
     /**

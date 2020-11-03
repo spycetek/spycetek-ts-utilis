@@ -7,36 +7,42 @@ var typescript_map_1 = require("typescript-map");
 var Utils = /** @class */ (function () {
     function Utils() {
     }
-    Utils.init = function () {
-        if (Utils.initialized) {
-            return;
-        }
-        Utils.parsePageParameter();
-        Utils.initialized = true;
-    };
     /**
      * Parse page parameter like <div class="spycetek-params" data-my-param-1=".." data-my-param-2=".." ...>.
      * This also moves this <div> to the end of <body>.
      */
-    Utils.parsePageParameter = function () {
+    Utils.parsePageParameters = function (namespace) {
         var params = new typescript_map_1.TSMap();
-        var $paramTags = $(Utils.DEFAULT_SELECTOR_PARAMS);
+        var $paramTags = $('.' + namespace);
         $paramTags.appendTo('body');
         $paramTags.each(function (i, element) {
             $.each($(element).data(), function (key, value) {
                 params.set(String(key), value);
             });
         });
-        Utils.pageParams = params;
+        Utils.pageParams[namespace] = params;
     };
     /**
      *
      * @param {string} dataName. e.g. "myValue" for attribute with name "data-my-value".
+     * @param namespace
      * @return {any} number, string, or associative array (object)
      */
-    Utils.getPageParameter = function (dataName) {
-        Utils.init();
-        return Utils.pageParams.get(dataName);
+    Utils.getPageParameter = function (dataName, namespace) {
+        if (namespace === void 0) { namespace = Utils.DEFAULT_SELECTOR_PARAMS; }
+        return Utils.getPageParameters(namespace).get(dataName);
+    };
+    /**
+     *
+     * @param namespace
+     * @return {TSMap<string, any>}
+     */
+    Utils.getPageParameters = function (namespace) {
+        if (namespace === void 0) { namespace = Utils.DEFAULT_SELECTOR_PARAMS; }
+        if (Utils.pageParams[namespace] == null) {
+            Utils.parsePageParameters(namespace);
+        }
+        return Utils.pageParams[namespace];
     };
     /**
      * Format number with comma as thousands separators.
@@ -140,7 +146,6 @@ var Utils = /** @class */ (function () {
         return true;
     };
     Utils.DEFAULT_SELECTOR_PARAMS = ".spycetek-params";
-    Utils.initialized = false;
     return Utils;
 }());
 exports.Utils = Utils;

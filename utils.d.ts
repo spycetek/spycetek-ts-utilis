@@ -1,22 +1,28 @@
+import { TSMap } from "typescript-map";
 /**
  *
  */
 export declare class Utils {
     static readonly DEFAULT_SELECTOR_PARAMS = ".spycetek-params";
     private static pageParams;
-    private static initialized;
-    static init(): void;
     /**
      * Parse page parameter like <div class="spycetek-params" data-my-param-1=".." data-my-param-2=".." ...>.
      * This also moves this <div> to the end of <body>.
      */
-    private static parsePageParameter;
+    private static parsePageParameters;
     /**
      *
      * @param {string} dataName. e.g. "myValue" for attribute with name "data-my-value".
+     * @param namespace
      * @return {any} number, string, or associative array (object)
      */
-    static getPageParameter(dataName: string): any;
+    static getPageParameter(dataName: string, namespace?: string): any;
+    /**
+     *
+     * @param namespace
+     * @return {TSMap<string, any>}
+     */
+    static getPageParameters(namespace?: string): TSMap<string, any>;
     /**
      * Format number with comma as thousands separators.
      * @param {number} num
