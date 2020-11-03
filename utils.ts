@@ -5,7 +5,7 @@ import {TSMap} from "typescript-map";
  */
 export class Utils {
 
-    static readonly DEFAULT_SELECTOR_PARAMS = ".spycetek-params";
+    static readonly DEFAULT_SELECTOR_PARAMS = "spycetek-params";
 
     private static pageParams: AssociativeArray<TSMap<string, any>> = {};
 

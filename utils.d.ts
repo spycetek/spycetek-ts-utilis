@@ -3,7 +3,7 @@ import { TSMap } from "typescript-map";
  *
  */
 export declare class Utils {
-    static readonly DEFAULT_SELECTOR_PARAMS = ".spycetek-params";
+    static readonly DEFAULT_SELECTOR_PARAMS = "spycetek-params";
     private static pageParams;
     /**
      * Parse page parameter like <div class="spycetek-params" data-my-param-1=".." data-my-param-2=".." ...>.

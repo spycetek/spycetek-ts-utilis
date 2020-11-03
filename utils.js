@@ -146,7 +146,7 @@ var Utils = /** @class */ (function () {
         }
         return true;
     };
-    Utils.DEFAULT_SELECTOR_PARAMS = ".spycetek-params";
+    Utils.DEFAULT_SELECTOR_PARAMS = "spycetek-params";
     Utils.pageParams = {};
     return Utils;
 }());

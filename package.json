@@ -1,6 +1,6 @@
 {
   "name": "spycetek-ts-utils",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "TypeScript (JavaScript) utility collection",
   "main": "utils.js",
   "types": "utils.d.ts",
