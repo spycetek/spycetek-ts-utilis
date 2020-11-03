@@ -7,7 +7,7 @@ export class Utils {
 
     static readonly DEFAULT_SELECTOR_PARAMS = ".spycetek-params";
 
-    private static pageParams: AssociativeArray<TSMap<string, any>>;
+    private static pageParams: AssociativeArray<TSMap<string, any>> = {};
 
     /**
      * Parse page parameter like <div class="spycetek-params" data-my-param-1=".." data-my-param-2=".." ...>.

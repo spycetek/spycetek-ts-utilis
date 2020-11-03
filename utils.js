@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Utils = void 0;
 var typescript_map_1 = require("typescript-map");
 /**
  *
@@ -146,6 +147,7 @@ var Utils = /** @class */ (function () {
         return true;
     };
     Utils.DEFAULT_SELECTOR_PARAMS = ".spycetek-params";
+    Utils.pageParams = {};
     return Utils;
 }());
 exports.Utils = Utils;
