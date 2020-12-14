@@ -24,6 +24,13 @@ export declare class Utils {
      */
     static getPageParameters(namespace?: string): TSMap<string, any>;
     /**
+     * Remove specified page parameter from both memory and DOM.
+     * @param dataName
+     * @param namespace
+     */
+    static removePageParameter(dataName: string, namespace: string): void;
+    static camelToKebab(text: string): string;
+    /**
      * Format number with comma as thousands separators.
      * @param {number} num
      * @returns {string}

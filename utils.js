@@ -46,6 +46,24 @@ var Utils = /** @class */ (function () {
         return Utils.pageParams[namespace];
     };
     /**
+     * Remove specified page parameter from both memory and DOM.
+     * @param dataName
+     * @param namespace
+     */
+    Utils.removePageParameter = function (dataName, namespace) {
+        var map = Utils.getPageParameters(namespace);
+        map.delete(dataName);
+        var $paramTags = $('.' + namespace);
+        $paramTags.removeData(dataName); // Remove value on memory
+        $paramTags.removeAttr("data-" + Utils.camelToKebab(dataName)); // Remove from DOM
+    };
+    Utils.camelToKebab = function (text) {
+        return text
+            .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
+            .replace(/([A-Z])([A-Z])(?=[a-z])/g, '$1-$2')
+            .toLowerCase();
+    };
+    /**
      * Format number with comma as thousands separators.
      * @param {number} num
      * @returns {string}

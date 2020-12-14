@@ -49,6 +49,27 @@ export class Utils {
     }
 
     /**
+     * Remove specified page parameter from both memory and DOM.
+     * @param dataName
+     * @param namespace
+     */
+    public static removePageParameter(dataName: string, namespace: string) {
+        let map = Utils.getPageParameters(namespace);
+        map.delete(dataName);
+
+        let $paramTags: JQuery = $('.' + namespace);
+        $paramTags.removeData(dataName); // Remove value on memory
+        $paramTags.removeAttr("data-" + Utils.camelToKebab(dataName)); // Remove from DOM
+    }
+
+    public static camelToKebab(text: string): string {
+        return text
+            .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
+            .replace(/([A-Z])([A-Z])(?=[a-z])/g, '$1-$2')
+            .toLowerCase();
+    }
+
+    /**
      * Format number with comma as thousands separators.
      * @param {number} num
      * @returns {string}
