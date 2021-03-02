@@ -66,10 +66,36 @@ var Utils = /** @class */ (function () {
     /**
      * Format number with comma as thousands separators.
      * @param {number} num
+     * @param {number} decimalPlace Default to 0
+     * @param {string} roundMethod Specify one of `floor`, `round`, and `ceil`. Default to `round`.
      * @returns {string}
      */
-    Utils.numberFormat = function (num) {
-        return num.toString().replace(/([0-9]+?)(?=(?:[0-9]{3})+$)/g, '$1,');
+    Utils.numberFormat = function (num, decimalPlace, roundMethod) {
+        if (decimalPlace === void 0) { decimalPlace = 0; }
+        if (roundMethod === void 0) { roundMethod = 'round'; }
+        // Round to specified decimal places
+        var tenth = Math.pow(10, decimalPlace);
+        roundMethod = roundMethod.toLowerCase();
+        switch (roundMethod) {
+            case 'floor':
+                num = Math.floor(num * tenth);
+                break;
+            case 'round':
+                num = Math.round(num * tenth);
+                break;
+            case 'ceil':
+                num = Math.ceil(num * tenth);
+                break;
+            default:
+                console.error("Specified rounding method \"" + roundMethod + "\" is not recognized. Using \"round\".");
+                num = Math.round(num * tenth);
+                break;
+        }
+        num /= tenth;
+        // Apply thousands comma separator only on left hand side of decimal point
+        var parts = num.toString().split(".");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return parts.join(".");
     };
     // /**
     //  * Returns border spaces of table element in pixels.

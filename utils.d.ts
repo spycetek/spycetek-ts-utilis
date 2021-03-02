@@ -33,9 +33,11 @@ export declare class Utils {
     /**
      * Format number with comma as thousands separators.
      * @param {number} num
+     * @param {number} decimalPlace Default to 0
+     * @param {string} roundMethod Specify one of `floor`, `round`, and `ceil`. Default to `round`.
      * @returns {string}
      */
-    static numberFormat(num: number): string;
+    static numberFormat(num: number, decimalPlace?: number, roundMethod?: string): string;
     /**
      * @param paramName parameter name to parse the value.
      * @param decode true to apply decodeURIComponent on the parsed value.

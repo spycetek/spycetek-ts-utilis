@@ -72,10 +72,35 @@ export class Utils {
     /**
      * Format number with comma as thousands separators.
      * @param {number} num
+     * @param {number} decimalPlace Default to 0
+     * @param {string} roundMethod Specify one of `floor`, `round`, and `ceil`. Default to `round`.
      * @returns {string}
      */
-    public static numberFormat(num: number): string {
-        return num.toString().replace(/([0-9]+?)(?=(?:[0-9]{3})+$)/g, '$1,');
+    public static numberFormat(num: number, decimalPlace: number = 0, roundMethod: string = 'round'): string {
+        // Round to specified decimal places
+        let tenth = Math.pow(10, decimalPlace);
+        roundMethod = roundMethod.toLowerCase();
+        switch (roundMethod) {
+            case 'floor':
+                num = Math.floor(num * tenth);
+                break;
+            case 'round':
+                num = Math.round(num * tenth);
+                break;
+            case 'ceil':
+                num = Math.ceil(num * tenth);
+                break;
+            default:
+                console.error(`Specified rounding method "${roundMethod}" is not recognized. Using "round".`);
+                num = Math.round(num * tenth);
+                break;
+        }
+        num /= tenth;
+
+        // Apply thousands comma separator only on left hand side of decimal point
+        let parts = num.toString().split(".");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return parts.join(".");
     }
 
     // /**
